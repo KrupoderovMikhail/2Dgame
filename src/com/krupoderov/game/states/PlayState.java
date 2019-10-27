@@ -21,7 +21,10 @@ public class PlayState extends GameState {
 
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
-
+        if (key.up.down) {
+            // test key
+            System.out.println("'W' is being pressed");
+        }
     }
 
     @Override
