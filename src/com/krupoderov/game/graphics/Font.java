@@ -10,37 +10,37 @@ import java.util.ArrayList;
 /**
  * Created by Krupoderov Mikhail on Oct, 2019
  */
-public class Sprite {
+public class Font {
 
-    private BufferedImage SPRITESHEET = null;
+    private BufferedImage FONTSHEET = null;
     private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
     public int w;
     public int h;
-    private int wSprite;
-    private int hSprite;
+    private int wLetter;
+    private int hLetter;
 
-    public Sprite(String file) {
+    public Font(String file) {
         w = TILE_SIZE;
         h = TILE_SIZE;
 
         System.out.println("Loading: " + file + "...");
-        SPRITESHEET = loadSprite(file);
+        FONTSHEET = loadFont(file);
 
-        wSprite = SPRITESHEET.getWidth() / w;
-        hSprite = SPRITESHEET.getHeight() / h;
+        wLetter = FONTSHEET.getWidth() / w;
+        hLetter = FONTSHEET.getHeight() / h;
         loadSpriteArray();
     }
 
-    public Sprite(String file, int w, int h) {
+    public Font(String file, int w, int h) {
         this.w = w;
         this.h = h;
 
         System.out.println("Loading: " + file + "...");
-        SPRITESHEET = loadSprite(file);
+        FONTSHEET = loadFont(file);
 
-        wSprite = SPRITESHEET.getWidth() / w;
-        hSprite = SPRITESHEET.getHeight() / h;
+        wLetter = FONTSHEET.getWidth() / w;
+        hLetter = FONTSHEET.getHeight() / h;
         loadSpriteArray();
     }
 
@@ -51,18 +51,18 @@ public class Sprite {
 
     public void setWidth(int i) {
         w = i;
-        wSprite = SPRITESHEET.getWidth() / w;
+        wLetter = FONTSHEET.getWidth() / w;
     }
 
     public void setHeight(int i) {
         h = i;
-        hSprite = SPRITESHEET.getHeight() / h;
+        hLetter = FONTSHEET.getHeight() / h;
     }
 
     public int getWidth() { return w; }
     public int getHeight() { return h; }
 
-    private BufferedImage loadSprite(String file) {
+    private BufferedImage loadFont(String file) {
         BufferedImage sprite = null;
         try {
             sprite = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
@@ -74,28 +74,29 @@ public class Sprite {
     }
 
     public void loadSpriteArray() {
-        spriteArray = new BufferedImage[hSprite][wSprite];
+        spriteArray = new BufferedImage[hLetter][wLetter];
 
-        for (int x = 0; x < wSprite; x++) {
-            for (int y = 0; y < hSprite; y++) {
-                spriteArray[x][y] = getSprite(x, y);
+        for (int x = 0; x < wLetter; x++) {
+            for (int y = 0; y < hLetter; y++) {
+                spriteArray[x][y] = getLetter(x, y);
             }
         }
     }
 
-    public BufferedImage getSpriteSheet() {
-        return SPRITESHEET; }
+    public BufferedImage getFontSheet() {
+        return FONTSHEET; }
 
-    public BufferedImage getSprite(int x, int y) {
-        return SPRITESHEET.getSubimage(x * w, y * h, w, h);
+    public BufferedImage getLetter(int x, int y) {
+        return FONTSHEET.getSubimage(x * w, y * h, w, h);
     }
 
-    public BufferedImage[] getSpriteArray(int i) {
-        return spriteArray[i];
-    }
+    public BufferedImage getFont(char letter) {
+        int value = letter - 65;
 
-    public BufferedImage[][] getSpriteArray2(int i) {
-        return spriteArray;
+        int x = value % wLetter;
+        int y = value % hLetter;
+
+        return FONTSHEET.getSubimage(x, y, w, h);
     }
 
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos,int width, int height, int xOffset, int yOffset) {
