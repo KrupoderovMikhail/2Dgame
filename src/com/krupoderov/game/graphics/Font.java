@@ -1,18 +1,14 @@
 package com.krupoderov.game.graphics;
 
-import com.krupoderov.game.util.Vector2f;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 /**
  * Created by Krupoderov Mikhail on Oct, 2019
  */
 public class Font {
 
-    private BufferedImage FONTSHEET = null;
+    private BufferedImage FONTSHEET;
     private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
     public int w;
@@ -29,7 +25,7 @@ public class Font {
 
         wLetter = FONTSHEET.getWidth() / w;
         hLetter = FONTSHEET.getHeight() / h;
-        loadSpriteArray();
+        loadFontArray();
     }
 
     public Font(String file, int w, int h) {
@@ -41,7 +37,7 @@ public class Font {
 
         wLetter = FONTSHEET.getWidth() / w;
         hLetter = FONTSHEET.getHeight() / h;
-        loadSpriteArray();
+        loadFontArray();
     }
 
     public void setSize(int width, int height) {
@@ -59,8 +55,13 @@ public class Font {
         hLetter = FONTSHEET.getHeight() / h;
     }
 
-    public int getWidth() { return w; }
-    public int getHeight() { return h; }
+    public int getWidth() {
+        return w;
+    }
+
+    public int getHeight() {
+        return h;
+    }
 
     private BufferedImage loadFont(String file) {
         BufferedImage sprite = null;
@@ -73,8 +74,8 @@ public class Font {
         return sprite;
     }
 
-    public void loadSpriteArray() {
-        spriteArray = new BufferedImage[hLetter][wLetter];
+    public void loadFontArray() {
+        spriteArray = new BufferedImage[wLetter][hLetter];
 
         for (int x = 0; x < wLetter; x++) {
             for (int y = 0; y < hLetter; y++) {
@@ -84,7 +85,8 @@ public class Font {
     }
 
     public BufferedImage getFontSheet() {
-        return FONTSHEET; }
+        return FONTSHEET;
+    }
 
     public BufferedImage getLetter(int x, int y) {
         return FONTSHEET.getSubimage(x * w, y * h, w, h);
@@ -93,36 +95,10 @@ public class Font {
     public BufferedImage getFont(char letter) {
         int value = letter - 65;
 
+        System.out.println(value);
         int x = value % wLetter;
-        int y = value % hLetter;
+        int y = value / wLetter;
 
-        return FONTSHEET.getSubimage(x, y, w, h);
-    }
-
-    public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos,int width, int height, int xOffset, int yOffset) {
-        float x = pos.x;
-        float y = pos.y;
-
-        for (int i = 0; i < img.size(); i++) {
-            if (img.get(i) != null) {
-                g.drawImage(img.get(i), (int) x, (int) y, width, height, null);
-            }
-
-            x += xOffset;
-            y += yOffset;
-        }
-    }
-
-    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height, int xOffset, int yOffset) {
-        float x = pos.x;
-        float y = pos.y;
-
-        for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) != 32)
-                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-        }
-
-        x += xOffset;
-        y += yOffset;
+        return getLetter(x, y);
     }
 }

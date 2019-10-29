@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Sprite {
 
-    private BufferedImage SPRITESHEET = null;
+    private BufferedImage SPRITESHEET;
     private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
     public int w;
@@ -59,8 +59,13 @@ public class Sprite {
         hSprite = SPRITESHEET.getHeight() / h;
     }
 
-    public int getWidth() { return w; }
-    public int getHeight() { return h; }
+    public int getWidth() {
+        return w;
+    }
+
+    public int getHeight() {
+        return h;
+    }
 
     private BufferedImage loadSprite(String file) {
         BufferedImage sprite = null;
@@ -84,7 +89,8 @@ public class Sprite {
     }
 
     public BufferedImage getSpriteSheet() {
-        return SPRITESHEET; }
+        return SPRITESHEET;
+    }
 
     public BufferedImage getSprite(int x, int y) {
         return SPRITESHEET.getSubimage(x * w, y * h, w, h);
@@ -98,7 +104,7 @@ public class Sprite {
         return spriteArray;
     }
 
-    public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos,int width, int height, int xOffset, int yOffset) {
+    public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos, int width, int height, int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
 
@@ -119,9 +125,8 @@ public class Sprite {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != 32)
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+            x += xOffset;
+            y += yOffset;
         }
-
-        x += xOffset;
-        y += yOffset;
     }
 }
