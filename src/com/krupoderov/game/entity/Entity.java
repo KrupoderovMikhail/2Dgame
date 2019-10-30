@@ -49,6 +49,8 @@ public abstract class Entity {
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
 
+    public int getSize() { return size; }
+
     public void setAnimation(int i, BufferedImage[] frames, int delay) {
         currentAnimation = i;
         ani.setFrames(frames);
