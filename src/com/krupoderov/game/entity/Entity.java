@@ -15,10 +15,10 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Entity {
 
-    private final int UP = 0;
-    private final int DOWN = 1;
-    private final int RIGHT = 2;
-    private final int LEFT = 3;
+    private final int UP = 3;
+    private final int DOWN = 2;
+    private final int RIGHT = 0;
+    private final int LEFT = 1;
     protected int currentAnimation;
 
     protected Animation ani;
@@ -37,9 +37,9 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-    protected float maxSpeed;
-    protected float acc;
-    protected float deacc;
+    protected float maxSpeed = 4f; // скорость героя
+    protected float acc = 1f;
+    protected float deacc = 0.3f; // плавность остановки, чем меньше значение, тем больше тормозной путь
 
     protected AABB hitBounds;
     protected AABB bounds;
