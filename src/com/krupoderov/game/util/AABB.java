@@ -56,8 +56,8 @@ public class AABB {
     public void setWidth(float f) { w = f; }
     public void setHeight(float f) { w = f; }
 
-    public void setxOffset(float f) { xOffset = f; }
-    public void setyOffset(float f) { yOffset = f; }
+    public void setXOffset(float f) { xOffset = f; }
+    public void setYOffset(float f) { yOffset = f; }
 
     public boolean collides(AABB bBox) {
         float ax = ((pos.getWorldVar().x + (xOffset)) + (w / 2));
