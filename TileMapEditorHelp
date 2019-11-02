@@ -1,0 +1,47 @@
+https://www.mapeditor.org/
+
+Using a later version of Tiled Map Editor (1.2.3) changes the format of the XML generated.
+I made some edits to the code shown in the video to get the tileColumns and tileCount variables.
+I created another String variable named imagePathTSX.
+
+------------------------------------------------------------------
+
+ NodeList list = doc.getElementsByTagName("tileset");
+
+ Node node = list.item(0);
+
+ Element eElement = (Element) node;
+
+ imagePathTSX = eElement.getAttribute("source");
+
+ imagePath = imagePathTSX.substring(0, imagePathTSX.length() - 4);
+
+
+ list = doc.getElementsByTagName("map");
+
+ node = list.item(0);
+
+ eElement = (Element) node;
+
+ tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
+
+ tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
+
+ sprite = new Sprite("tile/" + imagePath + ".png", tileWidth, tileHeight);
+
+ tileColumns = sprite.getSpriteSheetWidth() / tileWidth;
+
+ tileCount = tileColumns * (sprite.getSpriteSheetHeight() / tileHeight);
+
+ ------------------------------------------------------------------------
+
+I also created a couple of getter methods in the Sprite class.
+
+--------------------------------------------------------------------------
+
+ public int getSpriteSheetWidth() { return SPRITE_SHEET.getWidth(); }
+
+ public int getSpriteSheetHeight() { return SPRITE_SHEET.getHeight(); }
+
+----------------------------------------------------------------------------
+I am only up to this point in the tutorial but if this information is correct hopefully it can help others.
