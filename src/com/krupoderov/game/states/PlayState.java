@@ -20,7 +20,7 @@ public class PlayState extends GameState {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         font = new Font("font/ZeldaFont.png", 16, 16);
-        player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(300, 300), 128);
+        player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(300, 300), 100); // size 128
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PlayState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
-        Sprite.drawArray(g, font, "HELLO WORLD", new Vector2f(100, 100), 32, 32, 16, 0);
+        Sprite.drawArray(g, font, "It works", new Vector2f(100, 100), 32, 32, 16, 0);
         player.render(g);
     }
 }
