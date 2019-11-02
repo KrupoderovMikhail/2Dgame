@@ -39,6 +39,7 @@ public class PlayState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
+        tm.render(g);
         Sprite.drawArray(g, font, GamePanel.oldFrameCount + " FPS", new Vector2f(GamePanel.width - 192, 32), 32, 32, 24, 0);
         player.render(g);
     }
